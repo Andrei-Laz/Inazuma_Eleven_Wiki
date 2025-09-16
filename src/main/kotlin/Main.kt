@@ -7,7 +7,8 @@ fun main() {
     val carpetaPersonajes = Path.of("Players")
     val carpetaTecnicas = Path.of("Hissatsus")
 
-    val ficheroNombres = Path.of("Players/Player_Names.txt")
+  //  val ficheroNombres = Path.of("Players/Player_Names.txt")
+    val ficheroNombres = Path.of("Players", "Player_Names.txt")
 
     val placeholder = Path.of("Hissatsus/.gitkeep")
 
