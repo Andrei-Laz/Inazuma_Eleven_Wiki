@@ -4,31 +4,12 @@ import java.nio.file.Path
 import java.util.Arrays.stream
 
 fun main() {
-    val carpetaPrincipal = Path.of("./")
     val carpetaPersonajes = Path.of("Players")
     val carpetaTecnicas = Path.of("Hissatsus")
-
-    var checkPlayers = false
-    var checkHissatsus= false
 
     val ficheroNombres = Path.of("Players/Player_Names.txt")
 
     try {
-        Files.list(carpetaPrincipal).use {stream ->
-            stream.sorted().forEach { carpetas ->
-
-                if (carpetas.fileName.toString().equals(carpetaPersonajes.fileName.toString())) {
-                    checkPlayers = true
-                }
-                if (carpetas.fileName.toString().equals(carpetaTecnicas.fileName.toString())) {
-                    checkHissatsus = true
-                }
-            }
-        }
-
-        println(checkPlayers)
-        println(checkHissatsus)
-
         if (Files.notExists(carpetaTecnicas)) {
             Files.createDirectories(carpetaTecnicas)
         }
@@ -51,7 +32,5 @@ fun main() {
 
     } catch (e: Exception) {
         e.printStackTrace()
-    }
-
-
+        }
 }
