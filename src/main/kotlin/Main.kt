@@ -1,16 +1,57 @@
 package org.example
+import java.nio.file.Files
+import java.nio.file.Path
+import java.util.Arrays.stream
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+    val carpetaPrincipal = Path.of("./")
+    val carpetaPersonajes = Path.of("Players")
+    val carpetaTecnicas = Path.of("Hissatsus")
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+    var checkPlayers = false
+    var checkHissatsus= false
+
+    val ficheroNombres = Path.of("Players/Player_Names.txt")
+
+    try {
+        Files.list(carpetaPrincipal).use {stream ->
+            stream.sorted().forEach { carpetas ->
+
+                if (carpetas.fileName.toString().equals(carpetaPersonajes.fileName.toString())) {
+                    checkPlayers = true
+                }
+                if (carpetas.fileName.toString().equals(carpetaTecnicas.fileName.toString())) {
+                    checkHissatsus = true
+                }
+            }
+        }
+
+        println(checkPlayers)
+        println(checkHissatsus)
+
+        if (Files.notExists(carpetaTecnicas)) {
+            Files.createDirectories(carpetaTecnicas)
+        }
+        if (Files.notExists(carpetaPersonajes)) {
+            Files.createDirectories(carpetaPersonajes)
+        }
+
+        Files.list(carpetaPersonajes).use {stream ->
+            stream.sorted().forEach {item ->
+
+            }
+        }
+
+        if (Files.notExists(ficheroNombres)) {
+            println("No se ha encontrado el fichero con el nombre: " + ficheroNombres.fileName.toString())
+        }
+        else {
+            println("Encontrado el fichero con el nombre: " + ficheroNombres.fileName)
+        }
+
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
+
+
 }
